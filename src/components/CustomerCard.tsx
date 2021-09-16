@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { addFoodToCustomer } from '../features/customerSlice'
+import { addFoodToCustomer, removeCustomer } from '../features/customerSlice'
 import {useState} from "react"
 interface CustomerCardType {
   id: string;
@@ -13,6 +13,16 @@ export default function CustomerCard({id,name,food} : CustomerCardType) {
   return (
     <div className="customer-food-card-container">
       <p>{name}</p>
+      <br />
+      <button onClick={
+        () => {
+          dispatch(removeCustomer({
+            id,
+            name,
+            food
+          }))
+        }
+      }> Delete </button>
       <div className="customer-foods-container">
         <div className="customer-food">
           {food.map(food => {
@@ -32,6 +42,7 @@ export default function CustomerCard({id,name,food} : CustomerCardType) {
                 food: customerFoodInput
               }))
             }}>Add</button>
+            
         </div>
       </div>
     </div>
